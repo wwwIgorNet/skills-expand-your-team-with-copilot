@@ -166,13 +166,13 @@ initial_activities = {
     },
     "Manga Maniacs": {
         "description": "Dive into epic adventures, supernatural battles, and heartwarming slice-of-life tales! Join fellow manga enthusiasts to discuss your favorite series, discover hidden gems, and unleash your inner otaku. Whether you're into shonen action, shojo romance, or mind-bending seinen, there's a story waiting for you!",
-        "schedule": "Tuesdays, 7:00 PM - 8:00 PM",
+        "schedule": "Tuesdays, 5:00 PM - 6:00 PM",
         "schedule_details": {
             "days": ["Tuesday"],
-            "start_time": "19:00",
-            "end_time": "20:00"
+            "start_time": "17:00",
+            "end_time": "18:00"
         },
-        "max_participants": 15,
+        "max_participants": 25,
         "participants": []
     }
 }
