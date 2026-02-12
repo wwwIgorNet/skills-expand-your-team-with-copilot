@@ -31,12 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark mode functionality
   function initializeDarkMode() {
-    // Check for saved dark mode preference
+    // Check if dark mode elements exist
+    if (!darkModeToggle || !themeIcon) {
+      return;
+    }
+
+    // Check for saved dark mode preference (defaults to light mode if not set)
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
       document.body.classList.add("dark-mode");
       themeIcon.textContent = "☀️";
     } else {
+      // Default to light mode (savedTheme is null or 'light')
       themeIcon.textContent = "🌙";
     }
   }
@@ -53,7 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event listener for dark mode toggle
-  darkModeToggle.addEventListener("click", toggleDarkMode);
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+  }
 
   // Initialize dark mode on page load
   initializeDarkMode();
