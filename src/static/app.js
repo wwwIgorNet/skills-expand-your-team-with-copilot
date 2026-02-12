@@ -520,20 +520,16 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     // Create social sharing buttons
-    const shareUrl = encodeURIComponent(window.location.href);
-    const shareTitle = encodeURIComponent(`Join ${name} at Mergington High School`);
-    const shareText = encodeURIComponent(`${name}: ${details.description} - Schedule: ${formattedSchedule}`);
-    
     const socialShareButtons = `
       <div class="social-share-container">
         <span class="share-label">Share:</span>
-        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook">
+        <button class="share-button facebook" data-platform="facebook" title="Share on Facebook">
           <span class="share-icon">f</span>
         </button>
-        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter">
+        <button class="share-button twitter" data-platform="twitter" title="Share on Twitter">
           <span class="share-icon">𝕏</span>
         </button>
-        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email">
+        <button class="share-button email" data-platform="email" title="Share via Email">
           <span class="share-icon">✉</span>
         </button>
       </div>
