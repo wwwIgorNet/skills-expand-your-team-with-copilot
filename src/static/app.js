@@ -401,6 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Handle difficulty filter
+      // Only add difficulty parameter if it's not empty (empty string means "All Levels" - no filter)
       if (currentDifficulty) {
         queryParams.push(`difficulty=${encodeURIComponent(currentDifficulty)}`);
       }
