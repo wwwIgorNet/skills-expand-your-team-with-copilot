@@ -519,6 +519,26 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Create social sharing buttons
+    const shareUrl = encodeURIComponent(window.location.href);
+    const shareTitle = encodeURIComponent(`Join ${name} at Mergington High School`);
+    const shareText = encodeURIComponent(`${name}: ${details.description} - Schedule: ${formattedSchedule}`);
+    
+    const socialShareButtons = `
+      <div class="social-share-container">
+        <span class="share-label">Share:</span>
+        <button class="share-button facebook" data-activity="${name}" data-platform="facebook" title="Share on Facebook">
+          <span class="share-icon">f</span>
+        </button>
+        <button class="share-button twitter" data-activity="${name}" data-platform="twitter" title="Share on Twitter">
+          <span class="share-icon">𝕏</span>
+        </button>
+        <button class="share-button email" data-activity="${name}" data-platform="email" title="Share via Email">
+          <span class="share-icon">✉</span>
+        </button>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -528,6 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
       </p>
       ${capacityIndicator}
+      ${socialShareButtons}
       <div class="participants-list">
         <h5>Current Participants:</h5>
         <ul>
@@ -575,6 +596,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButtons = activityCard.querySelectorAll(".delete-participant");
     deleteButtons.forEach((button) => {
       button.addEventListener("click", handleUnregister);
+    });
+
+    // Add click handlers for social share buttons
+    const shareButtons = activityCard.querySelectorAll(".share-button");
+    shareButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        handleShare(event, name, details, formattedSchedule);
+      });
     });
 
     // Add click handler for register button (only when authenticated)
@@ -797,6 +826,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     );
+  }
+
+  // Handle social sharing
+  function handleShare(event, activityName, details, formattedSchedule) {
+    const platform = event.currentTarget.dataset.platform;
+    const shareUrl = window.location.href;
+    const shareTitle = `Join ${activityName} at Mergington High School`;
+    const shareText = `${activityName}: ${details.description} - Schedule: ${formattedSchedule}`;
+    
+    let url = "";
+    
+    switch (platform) {
+      case "facebook":
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        window.open(url, "_blank", "width=600,height=400");
+        break;
+      
+      case "twitter":
+        url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(url, "_blank", "width=600,height=400");
+        break;
+      
+      case "email":
+        const subject = encodeURIComponent(shareTitle);
+        const body = encodeURIComponent(`${shareText}\n\nLearn more: ${shareUrl}`);
+        url = `mailto:?subject=${subject}&body=${body}`;
+        window.location.href = url;
+        break;
+    }
   }
 
   // Show message function
